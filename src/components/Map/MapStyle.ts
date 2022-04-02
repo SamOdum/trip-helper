@@ -6,7 +6,7 @@ const useMapStyles = makeStyles()(() => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    width: "100px",
+    width: "110px",
   },
   mapContainer: {
     height: "85vh",
@@ -19,8 +19,11 @@ const useMapStyles = makeStyles()(() => ({
     zIndex: 1,
     "&:hover": { zIndex: 2 },
   },
-  pointer: {
+  img: {
     cursor: "pointer",
+  },
+  typograpgy: {
+    fontSize: "14px",
   },
 }));
 

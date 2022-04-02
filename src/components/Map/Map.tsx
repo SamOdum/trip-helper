@@ -1,10 +1,48 @@
+import { Paper, Rating, Typography, useMediaQuery } from "@mui/material";
 import GoogleMapReact from "google-map-react";
+import { LocationOn } from "@mui/icons-material";
 import useMapStyles from "./MapStyle";
-import { MapProps } from "./MapTypes";
+import { MapProps, MarkerProps } from "./MapTypes";
+
+const Marker = ({ place, lat, lng }: MarkerProps) => {
+  const { classes } = useMapStyles();
+  const isMobile = useMediaQuery("(max-width: 600px)");
+
+  return (
+    <div className={classes.markerContainer}>
+      {isMobile ? (
+        <LocationOn color="primary" fontSize="large" />
+      ) : (
+        <Paper elevation={3} className={classes.paper}>
+          <Typography className="" variant="subtitle2" gutterBottom>
+            {place.name}
+          </Typography>
+          <img
+            className={classes.img}
+            src={
+              place.photo
+                ? place.photo.images.small.url
+                : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
+            }
+            alt={place.name}
+          />
+
+          <Rating
+            name="read-only"
+            size="small"
+            value={Number(place.rating)}
+            readOnly
+            // className={classes.rating}
+          />
+        </Paper>
+      )}
+    </div>
+  );
+};
 
 const Google_Map_Key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "";
 
-const Map = ({ coordinates, setCoordinates, setBounds }: MapProps) => {
+const Map = ({ coordinates, setCoordinates, setBounds, places }: MapProps) => {
   const { classes } = useMapStyles();
 
   const defaultProps = {
@@ -14,6 +52,7 @@ const Map = ({ coordinates, setCoordinates, setBounds }: MapProps) => {
     },
     zoom: 14,
   };
+
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
@@ -27,7 +66,16 @@ const Map = ({ coordinates, setCoordinates, setBounds }: MapProps) => {
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
-      ></GoogleMapReact>
+      >
+        {places?.map((place, i) => (
+          <Marker
+            key={i + place.location_id}
+            place={place}
+            lat={Number(place.latitude)}
+            lng={Number(place.longitude)}
+          />
+        ))}
+      </GoogleMapReact>
     </div>
   );
 };
