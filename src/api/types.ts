@@ -88,6 +88,10 @@ type PlaceProps = {
     mobile: [];
   };
   listing_key: string;
+  address: string;
+  phone: string;
+  web_url: string;
+  website: string;
 };
 
 type PlacesDataProps = PlaceProps[];
