@@ -41,8 +41,8 @@ const List = ({ places }: { places: PlacesDataProps }) => {
         </Select>
       </FormControl>
       <Grid container spacing={3} className={classes.list}>
-        {places?.map((place) => (
-          <Grid item key={place.location_id} xs={12}>
+        {places?.map((place, i) => (
+          <Grid item key={i + place.location_id} xs={12}>
             <PlaceDetails place={place} />
           </Grid>
         ))}
