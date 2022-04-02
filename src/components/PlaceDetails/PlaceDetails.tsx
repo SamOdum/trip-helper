@@ -1,17 +1,23 @@
 import {
   Box,
+  Button,
   Card,
+  CardActions,
   CardContent,
   CardMedia,
   Chip,
+  Rating,
   Typography,
 } from "@mui/material";
+import { LocationOn, Phone } from "@mui/icons-material";
 import { PlaceProps } from "../../api/types";
 
 import usePlaceDetailsStyles from "./PlaceDetailStyle";
 
 const PlaceDetails = ({ place }: { place: PlaceProps }) => {
   const { classes } = usePlaceDetailsStyles();
+
+  const handleBtnClick = (url: string) => window.open(url, "blank");
 
   return (
     <Card elevation={6}>
@@ -28,6 +34,12 @@ const PlaceDetails = ({ place }: { place: PlaceProps }) => {
         <Typography gutterBottom variant="h5">
           {place.name}
         </Typography>
+        <Box display="flex" justifyContent="space-between" alignItems="start">
+          <Rating name="read-only" value={Number(place.rating)} readOnly />
+          <Typography gutterBottom variant="subtitle1">
+            Out of {place.num_reviews} reviews
+          </Typography>
+        </Box>
         <Box display="flex" justifyContent="space-between">
           <Typography variant="subtitle1">Price</Typography>
           <Typography gutterBottom variant="subtitle1">
@@ -35,7 +47,7 @@ const PlaceDetails = ({ place }: { place: PlaceProps }) => {
           </Typography>
         </Box>
         <Box display="flex" justifyContent="space-between">
-          <Typography variant="subtitle1">Ranking</Typography>
+          <Typography variant="subtitle1">Ranking </Typography>
           <Typography gutterBottom variant="subtitle1">
             {place.ranking}
           </Typography>
@@ -57,7 +69,45 @@ const PlaceDetails = ({ place }: { place: PlaceProps }) => {
         {place?.cuisine?.map(({ name }) => (
           <Chip key={name} label={name} className={classes.chip} />
         ))}
+        {place?.address && (
+          <Typography
+            gutterBottom
+            variant="body2"
+            color="textSecondary"
+            className={classes.subtitle}
+          >
+            <LocationOn />
+            {place.address}
+          </Typography>
+        )}
+        {place?.phone && (
+          <Typography
+            gutterBottom
+            variant="body2"
+            color="textSecondary"
+            className={classes.spacing}
+          >
+            <Phone />
+            {place.phone}
+          </Typography>
+        )}
       </CardContent>
+      <CardActions>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => handleBtnClick(place.web_url)}
+        >
+          Trip Helper
+        </Button>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => handleBtnClick(place.website)}
+        >
+          Website
+        </Button>
+      </CardActions>
     </Card>
   );
 };
