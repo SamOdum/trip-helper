@@ -1,13 +1,23 @@
-import React, { StrictMode } from "react";
-import ReactDOM from "react-dom";
+import * as ReactDOMClient from "react-dom/client";
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-ReactDOM.render(
-  <StrictMode>
+export const muiCache = createCache({
+  key: "mui",
+  prepend: true,
+});
+
+const container = document.getElementById("root") as Element;
+
+// Create a root.
+const root = ReactDOMClient.createRoot(container);
+
+root.render(
+  <CacheProvider value={muiCache}>
     <App />
-  </StrictMode>,
-  document.getElementById("root")
+  </CacheProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
