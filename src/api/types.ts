@@ -1,4 +1,6 @@
-type PlacesDataProps = {
+import { Coords } from "google-map-react";
+
+type PlaceProps = {
   location_id: string;
   name: string;
   latitude: string;
@@ -70,7 +72,7 @@ type PlacesDataProps = {
   distance: string;
   distance_string?: string;
   bearing: string;
-  cuising: [{ name: string }];
+  cuisine: [{ name: string }];
   rating: string;
   is_closed: false;
   is_long_closed: false;
@@ -86,6 +88,13 @@ type PlacesDataProps = {
     mobile: [];
   };
   listing_key: string;
-}[];
+};
 
-export type { PlacesDataProps };
+type PlacesDataProps = PlaceProps[];
+
+type GetPlacesDataProps = {
+  ne: Coords;
+  sw: Coords;
+};
+
+export type { GetPlacesDataProps, PlaceProps, PlacesDataProps };
