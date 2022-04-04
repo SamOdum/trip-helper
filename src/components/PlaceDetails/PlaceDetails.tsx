@@ -10,23 +10,29 @@ import {
   Typography,
 } from "@mui/material";
 import { LocationOn, Phone } from "@mui/icons-material";
-import { PlaceProps } from "../../api/types";
 
 import usePlaceDetailsStyles from "./PlaceDetailStyle";
+import { PlaceDetailsProps } from "./PlaceDetailTypes";
 
-const PlaceDetails = ({ place }: { place: PlaceProps }) => {
+const PlaceDetails = ({ place, selected, refProp }: PlaceDetailsProps) => {
   const { classes } = usePlaceDetailsStyles();
+
+  if (selected)
+    refProp?.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
 
   const handleBtnClick = (url: string) => window.open(url, "blank");
 
   return (
-    <Card elevation={6}>
+    <Card elevation={6} ref={refProp}>
       <CardMedia
         style={{ height: 350 }}
         image={
           place.photo
             ? place.photo.images.large.url
-            : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
+            : "./trip-helper-substitue-img.jpg"
         }
         title={place.name}
       />
@@ -98,7 +104,7 @@ const PlaceDetails = ({ place }: { place: PlaceProps }) => {
           color="primary"
           onClick={() => handleBtnClick(place.web_url)}
         >
-          Trip Helper
+          Trip Advisor
         </Button>
         <Button
           size="small"
