@@ -12,6 +12,9 @@ const useMapStyles = makeStyles()(() => ({
     height: "85vh",
     width: "100%",
     paddingRight: "25px",
+    "@media (max-width: 899px)": {
+      paddingLeft: "25px",
+    },
   },
   markerContainer: {
     position: "absolute",

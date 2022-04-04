@@ -22,7 +22,7 @@ const Marker = ({ place, lat, lng }: MarkerProps) => {
             src={
               place.photo
                 ? place.photo.images.small.url
-                : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
+                : "./trip-helper-substitue-img.jpg"
             }
             alt={place.name}
           />
@@ -32,7 +32,6 @@ const Marker = ({ place, lat, lng }: MarkerProps) => {
             size="small"
             value={Number(place.rating)}
             readOnly
-            // className={classes.rating}
           />
         </Paper>
       )}
@@ -42,7 +41,13 @@ const Marker = ({ place, lat, lng }: MarkerProps) => {
 
 const Google_Map_Key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "";
 
-const Map = ({ coordinates, setCoordinates, setBounds, places }: MapProps) => {
+const Map = ({
+  coordinates,
+  setCoordinates,
+  setBounds,
+  places,
+  setChildClicked,
+}: MapProps) => {
   const { classes } = useMapStyles();
 
   const defaultProps = {
@@ -66,10 +71,11 @@ const Map = ({ coordinates, setCoordinates, setBounds, places }: MapProps) => {
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
+        onChildClick={(child) => setChildClicked(Number(child))}
       >
         {places?.map((place, i) => (
           <Marker
-            key={i + place.location_id}
+            key={i}
             place={place}
             lat={Number(place.latitude)}
             lng={Number(place.longitude)}
