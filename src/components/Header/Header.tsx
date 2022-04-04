@@ -1,4 +1,3 @@
-import React from "react";
 import {
   AppBar,
   Box,
@@ -10,8 +9,10 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 
 import useHeaderStyle from "./HeaderStyle";
+import { Autocomplete } from "@react-google-maps/api";
+import { HeaderProps } from "./HeaderTypes";
 
-const Header = () => {
+const Header = ({ onLoad, onPlaceChanged }: HeaderProps) => {
   const { classes } = useHeaderStyle();
 
   return (
@@ -24,17 +25,19 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             Explore new places
           </Typography>
-          <div className={classes.search}>
-            <IconButton aria-label="search icon">
-              <SearchIcon className={classes.icon} />
-            </IconButton>
-            <InputBase
-              aria-label="search"
-              placeholder="Search..."
-              classes={{ input: classes.inputInput }}
-              style={{ color: "#fff" }}
-            />
-          </div>
+          <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+            <div className={classes.search}>
+              <IconButton aria-label="search icon">
+                <SearchIcon className={classes.icon} />
+              </IconButton>
+              <InputBase
+                aria-label="search"
+                placeholder="Search..."
+                classes={{ input: classes.inputInput }}
+                style={{ color: "#fff" }}
+              />
+            </div>
+          </Autocomplete>
         </Box>
       </Toolbar>
     </AppBar>
