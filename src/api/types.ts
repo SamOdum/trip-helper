@@ -99,6 +99,7 @@ type PlacesDataProps = PlaceProps[];
 type GetPlacesDataProps = {
   ne: Coords;
   sw: Coords;
+  type: string;
 };
 
 export type { GetPlacesDataProps, PlaceProps, PlacesDataProps };

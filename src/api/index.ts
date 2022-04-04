@@ -3,13 +3,13 @@ import { GetPlacesDataProps, PlacesDataProps } from "./types";
 
 const Rapid_API_Key = process.env.React_APP_RAPID_API_KEY || "";
 
-const URL =
-  "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary";
-
 const getPlacesData = async ({
   ne,
   sw,
+  type,
 }: GetPlacesDataProps): Promise<PlacesDataProps> => {
+  const URL = `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`;
+
   const options = {
     url: URL,
     params: {
@@ -28,7 +28,7 @@ const getPlacesData = async ({
     },
   };
 
-  let result;
+  let result: PlacesDataProps = [];
 
   try {
     const { data } = await axios.request(options);
