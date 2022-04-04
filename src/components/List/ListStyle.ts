@@ -14,9 +14,17 @@ const useListStyles = makeStyles()((theme: Theme) => ({
     padding: "25px",
     paddingTop: 0,
   },
+  loading: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "25vh",
+  },
   list: {
-    height: "75vh",
+    height: "65vh",
     overflow: "auto",
+    marginTop: 0,
   },
 }));
 
