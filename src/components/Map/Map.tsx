@@ -60,28 +60,30 @@ const Map = ({
 
   return (
     <div className={classes.mapContainer}>
-      <GoogleMapReact
-        bootstrapURLKeys={{
-          key: Google_Map_Key,
-        }}
-        defaultZoom={defaultProps.zoom}
-        defaultCenter={defaultProps.center}
-        center={coordinates}
-        onChange={(e) => {
-          setCoordinates({ lat: e.center.lat, lng: e.center.lng });
-          setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
-        }}
-        onChildClick={(child) => setChildClicked(Number(child))}
-      >
-        {places?.map((place, i) => (
-          <Marker
-            key={i}
-            place={place}
-            lat={Number(place.latitude)}
-            lng={Number(place.longitude)}
-          />
-        ))}
-      </GoogleMapReact>
+      <div className={classes.mapParent}>
+        <GoogleMapReact
+          bootstrapURLKeys={{
+            key: Google_Map_Key,
+          }}
+          defaultZoom={defaultProps.zoom}
+          defaultCenter={defaultProps.center}
+          center={coordinates}
+          onChange={(e) => {
+            setCoordinates({ lat: e.center.lat, lng: e.center.lng });
+            setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+          }}
+          onChildClick={(child) => setChildClicked(Number(child))}
+        >
+          {places?.map((place, i) => (
+            <Marker
+              key={i}
+              place={place}
+              lat={Number(place.latitude)}
+              lng={Number(place.longitude)}
+            />
+          ))}
+        </GoogleMapReact>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
+import { Theme } from "@mui/material/styles";
 import { makeStyles } from "tss-react/mui";
 
-const useMapStyles = makeStyles()(() => ({
+const useMapStyles = makeStyles()((theme: Theme) => ({
   paper: {
     padding: "10px",
     display: "flex",
@@ -9,12 +10,18 @@ const useMapStyles = makeStyles()(() => ({
     width: "110px",
   },
   mapContainer: {
-    height: "85vh",
+    // height: "85vh",
     width: "100%",
     paddingRight: "25px",
-    "@media (max-width: 899px)": {
+    [theme.breakpoints.down("md")]: {
       paddingLeft: "25px",
+      marginBottom: "24px",
     },
+  },
+  mapParent: {
+    backgroundColor: "red",
+    height: "84.8vh",
+    [theme.breakpoints.up("xl")]: { height: "80.3vh" },
   },
   markerContainer: {
     position: "absolute",
