@@ -1,10 +1,9 @@
 import {
+  Box,
   CircularProgress,
-  FormControl,
   Grid,
-  InputLabel,
   MenuItem,
-  Select,
+  TextField,
   Typography,
 } from "@mui/material";
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
@@ -28,32 +27,39 @@ const List = ({
 
   return (
     <div className={classes.container}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h5" gutterBottom className={classes.heading}>
         Hotels, Restaurants & Attractions around you
       </Typography>
 
       <>
-        <FormControl className={classes.formControl}>
-          <InputLabel>Type</InputLabel>
-          <Select value={type} onChange={(e) => setType(e.target.value)}>
+        <Box className={classes.select}>
+          <TextField
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            select
+            label="Rating"
+            variant="standard"
+            className={classes.input}
+          >
             <MenuItem value="restaurants">Restaurants</MenuItem>
             <MenuItem value="hotels">Hotels</MenuItem>
             <MenuItem value="attractions">Attractions</MenuItem>
-          </Select>
-        </FormControl>
+          </TextField>
 
-        <FormControl className={classes.formControl}>
-          <InputLabel>Rating</InputLabel>
-          <Select
+          <TextField
             value={rating}
             onChange={(e) => setRating(Number(e.target.value))}
+            select
+            label="Rating"
+            variant="standard"
+            className={classes.input}
           >
             <MenuItem value={0}>All</MenuItem>
             <MenuItem value={3}>Above 3.0</MenuItem>
             <MenuItem value={4}>Above 4.0</MenuItem>
             <MenuItem value={4.5}>Above 4.5</MenuItem>
-          </Select>
-        </FormControl>
+          </TextField>
+        </Box>
         {loading ? (
           <div className={classes.loading}>
             <CircularProgress size="5rem" color="primary" />
