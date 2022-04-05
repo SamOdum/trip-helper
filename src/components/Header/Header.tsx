@@ -16,13 +16,11 @@ const Header = ({ onLoad, onPlaceChanged }: HeaderProps) => {
   const { classes } = useHeaderStyle();
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.header}>
       <Toolbar className={classes.toolbar}>
-        <Typography variant="h5" className={classes.title}>
-          Trip Helper
-        </Typography>
+        <Typography variant="h5">TripHelper</Typography>
         <Box display="flex" alignItems="center">
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.byline}>
             Explore new places
           </Typography>
           <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>

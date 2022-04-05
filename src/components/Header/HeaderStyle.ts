@@ -1,9 +1,14 @@
 import { alpha, Theme } from "@mui/material";
 import { makeStyles } from "tss-react/mui";
+import { colors } from "../../variables";
 
 const useHeaderStyle = makeStyles()((theme: Theme) => {
   return {
-    title: {
+    header: {
+      backgroundColor: colors.priBrand,
+    },
+    title: {},
+    byline: {
       display: "none",
       [theme.breakpoints.up("sm")]: {
         display: "block",
@@ -12,11 +17,10 @@ const useHeaderStyle = makeStyles()((theme: Theme) => {
     search: {
       position: "relative",
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: alpha(theme.palette.common.white, 0.15),
-      "&:hover": { backgroundColor: alpha(theme.palette.common.white, 0.25) },
-      // marginRight: theme.spacing(2),
+      backgroundColor: alpha(colors.whiteBrand, 0.15),
+      "&:hover": { backgroundColor: alpha(colors.whiteBrand, 0.25) },
       marginLeft: 0,
-      width: "100%",
+      width: "150px",
       [theme.breakpoints.up("sm")]: {
         marginLeft: theme.spacing(3),
         width: "auto",
@@ -38,6 +42,7 @@ const useHeaderStyle = makeStyles()((theme: Theme) => {
     toolbar: {
       display: "flex",
       justifyContent: "space-between",
+      alignItems: "center",
     },
   };
 });
