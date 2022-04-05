@@ -49,7 +49,6 @@ const useGetPlaces = () => {
     ne: initialCoords,
     sw: initialCoords,
   });
-  console.log({ rating });
 
   useEffect(() => {
     const arrayOfFiltered = places.filter(
@@ -57,8 +56,9 @@ const useGetPlaces = () => {
     );
     setFilteredPlaces(arrayOfFiltered);
     setChildClicked(0);
-    console.log("setFilteredPlaces called!");
 
+    // DO NOT include places in the dependency array to
+    // prevent an infinite render loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rating]);
 
@@ -69,7 +69,6 @@ const useGetPlaces = () => {
       sw: bounds.sw,
       type,
     });
-    console.log("getPlacesData called!");
 
     apiPlaces.then((data) => {
       setPlaces(data);
